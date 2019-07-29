@@ -4,8 +4,10 @@ const Controller = require('egg').Controller;
 
 class HomeController extends Controller {
   async index() {
-    const { ctx } = this;
-    ctx.body = 'hi, egg';
+    const client = await this.app.mysql.get('db1');
+    const user = await client.query('users');
+    console.log(user);
+    this.ctx.body = 'hi, egg';
   }
 }
 
